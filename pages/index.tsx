@@ -1,12 +1,9 @@
 import Head from "next/head";
 import useSWR from "swr";
-import fetch from "isomorphic-unfetch";
-import { Channel } from "../models/channel";
 import ChannelList from "../components/channelList";
 
 export default function Home() {
-  const fetcher = (url: any) => fetch(url).then((r) => r.json());
-  const { data: channelsWrapper, mutate } = useSWR("/api/channels", fetcher);
+  const { data: channelsWrapper, mutate } = useSWR("/api/channels");
 
   if (channelsWrapper) {
     return (
