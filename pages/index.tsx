@@ -2,6 +2,7 @@ import Head from "next/head";
 import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import { Channel } from "../models/channel";
+import ChannelList from "../components/channelList";
 
 export default function Home() {
   const fetcher = (url: any) => fetch(url).then((r) => r.json());
@@ -17,9 +18,7 @@ export default function Home() {
 
         <main>
           <h1>A list of slack channels should appear here:</h1>
-          {channelsWrapper.channels.map((channel: Channel) => {
-            return <li key={channel.name}>{channel.name}</li>;
-          })}
+          <ChannelList channels={channelsWrapper.channels} />
         </main>
       </div>
     );
