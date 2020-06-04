@@ -17,6 +17,8 @@
 
 /data/
 
+public/data
+
 # misc
 .DS_Store
 
