@@ -2,7 +2,7 @@ import Navbar from "./navbar";
 import Container from "react-bootstrap/Container";
 import Head from "next/head";
 
-export default (props: { children: React.ReactElement[] }) => {
+export default (props: { children: React.ReactElement }) => {
   return (
     <div className="container">
       <Head>
