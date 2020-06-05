@@ -4,7 +4,7 @@ export default (props: { channels: Channel[] }) => {
   return (
     <ul>
       {props.channels.map((channel) => {
-        return <li key={channel.id}>{channel.name}</li>;
+        return <li key={channel.id}># {channel.name}</li>;
       })}
     </ul>
   );
