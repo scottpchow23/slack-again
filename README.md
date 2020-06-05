@@ -1,4 +1,4 @@
-# slack again
+# slack archive
 
 A local tool to bring slack exports to life - again.
 

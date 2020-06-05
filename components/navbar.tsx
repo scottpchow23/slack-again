@@ -1,6 +1,6 @@
 import Navbar from "react-bootstrap/Navbar";
 
-const appName = "slack again";
+const appName = "slack archive";
 
 export default () => {
   return (
