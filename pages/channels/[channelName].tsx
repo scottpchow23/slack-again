@@ -9,7 +9,7 @@ export default function () {
   const router = useRouter();
   const { channelName } = router.query;
   const { data } = useSWR(channelName ? `/api/channels/${channelName}` : null);
-  if (channelName) {
+  if (data) {
     console.log(data);
     const messages = data?.messages;
     const channel = data?.channel;
@@ -19,7 +19,7 @@ export default function () {
         <>
           <h1>#{channelName}</h1>
           {channel && <MemberTable channel={channel} users={users} />}
-          {messages && <MessageList messages={messages} />}
+          {messages && <MessageList messages={messages} users={users} />}
         </>
       </Layout>
     );
