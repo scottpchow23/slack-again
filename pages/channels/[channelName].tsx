@@ -2,28 +2,24 @@ import Layout from "components/layout";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Message } from "models/message";
+import MessageList from "components/messageList";
+import MemberTable from "components/memberTable";
 
 export default function () {
   const router = useRouter();
   const { channelName } = router.query;
-  const { data } = useSWR(`/api/channels/${channelName}`);
+  const { data } = useSWR(channelName ? `/api/channels/${channelName}` : null);
   if (channelName) {
     console.log(data);
+    const messages = data?.messages;
+    const channel = data?.channel;
+    const users = data?.users;
     return (
       <Layout>
         <>
-          <h1># {channelName}</h1>
-          <ul>
-            {data &&
-              data.messages.map((message: Message) => {
-                return (
-                  <li key={message.ts}>
-                    <b>{message.user_profile?.real_name || message.user}: </b>
-                    {message.text}
-                  </li>
-                );
-              })}
-          </ul>
+          <h1>#{channelName}</h1>
+          {channel && <MemberTable channel={channel} users={users} />}
+          {messages && <MessageList messages={messages} />}
         </>
       </Layout>
     );
