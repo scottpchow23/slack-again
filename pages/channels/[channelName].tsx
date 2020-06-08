@@ -1,7 +1,6 @@
 import Layout from "components/layout";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { Message } from "models/message";
 import MessageList from "components/messageList";
 import MemberTable from "components/memberTable";
 
