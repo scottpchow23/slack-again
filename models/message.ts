@@ -27,4 +27,34 @@ export interface Message {
       text: string;
     }[];
   }[];
+  bot_id?: string;
+  bot_profile?: {
+    id: string;
+    deleted: string;
+    name: string;
+    updated: number;
+    app_id: string;
+    icons: {
+      image_36: string;
+      image_48: string;
+      image_72: string;
+    };
+    team_id: string;
+  };
+  attachments?: {
+    author_name: string;
+    fallback: string;
+    text: string;
+    pretext: string;
+    title: string;
+    footer: string;
+    id: number;
+    title_link: string;
+    author_link: string;
+    author_icon: string;
+    footer_icon: string;
+    ts: number;
+    color: string;
+    mrkdwn: string[];
+  }[];
 }
