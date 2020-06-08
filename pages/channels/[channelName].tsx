@@ -9,7 +9,6 @@ export default function () {
   const { channelName } = router.query;
   const { data } = useSWR(channelName ? `/api/channels/${channelName}` : null);
   if (data) {
-    console.log(data);
     const messages = data?.messages;
     const channel = data?.channel;
     const users = data?.users;
