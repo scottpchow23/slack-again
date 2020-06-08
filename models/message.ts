@@ -1,13 +1,14 @@
 export interface Message {
-  client_msg_id: string;
+  client_msg_id?: string;
   type: string;
+  subtype?: string;
   text: string;
   user: string;
   ts: string;
-  team: string;
-  user_team: string;
-  source_team: string;
-  user_profile: {
+  team?: string;
+  user_team?: string;
+  source_team?: string;
+  user_profile?: {
     avatar_hash: string;
     image_72: string;
     first_name: string;
@@ -18,7 +19,7 @@ export interface Message {
     is_restricted: boolean;
     is_ultra_restricted: boolean;
   };
-  blocks: {
+  blocks?: {
     type: string;
     block_id: string;
     elements: {
