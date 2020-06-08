@@ -18,7 +18,8 @@ export default function () {
               data.messages.map((message: Message) => {
                 return (
                   <li key={message.ts}>
-                    {message.user}: {message.text}
+                    <b>{message.user_profile?.real_name || message.user}: </b>
+                    {message.text}
                   </li>
                 );
               })}
