@@ -1,4 +1,3 @@
-import Head from "next/head";
 import useSWR from "swr";
 import ChannelList from "components/channelList";
 import Layout from "components/layout";

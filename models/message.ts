@@ -9,15 +9,15 @@ export interface Message {
   user_team?: string;
   source_team?: string;
   user_profile?: {
-    avatar_hash: string;
-    image_72: string;
-    first_name: string;
+    avatar_hash?: string;
+    image_72?: string;
+    first_name?: string;
     real_name: string;
     display_name: string;
-    team: string;
-    name: string;
-    is_restricted: boolean;
-    is_ultra_restricted: boolean;
+    team?: string;
+    name?: string;
+    is_restricted?: boolean;
+    is_ultra_restricted?: boolean;
   };
   blocks?: {
     type: string;

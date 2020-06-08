@@ -1,11 +1,9 @@
 import { Message } from "models/message";
 import { User } from "models/user";
+import { resolveIDs, sortedMessages } from "utils/slack";
 
-function sortedMessages(messages: Message[]) {
-  return messages.sort((a: Message, b: Message) => Number(a.ts) - Number(b.ts));
-}
-
-export default (props: { messages: Message[] }) => {
+export default (props: { messages: Message[]; users: User[] }) => {
+  resolveIDs(props.messages, props.users);
   return (
     <ul>
       {sortedMessages(props.messages).map((message: Message) => {
