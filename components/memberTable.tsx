@@ -23,7 +23,7 @@ export default (props: { channel: Channel; users: User[] }) => {
             <ul>
               {channel.members.map((member) => {
                 let user = userMap[member];
-                return <li>{user.profile.real_name}</li>;
+                return <li key={user.id}>{user.profile.real_name}</li>;
               })}
             </ul>
           </Card.Body>
