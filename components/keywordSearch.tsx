@@ -8,6 +8,16 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useCallback, FormEvent } from "react";
 import MessageList from "./messageList";
+import { messagesToData } from "utils/plotting";
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
+import Col from "react-bootstrap/Col";
 
 const countKeyword = (keyword: string, messages: Message[]) => {
   let count = 0;
@@ -29,15 +39,23 @@ interface SearchResult {
   keyMessages: Message[];
 }
 
+interface KeywordPlotData {
+  x: number;
+  y: number;
+  name: string;
+}
+
 export default (props: { messages: Message[]; users: User[] }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult | null>(null);
+  const [keywordData, setKeywordData] = useState(Array<KeywordPlotData>());
   const handleSubmit = useCallback(
     (e: FormEvent) => {
       e.stopPropagation();
       e.preventDefault();
       let result = countKeyword(searchTerm, props.messages);
       setSearchResults(result);
+      setKeywordData(messagesToData(result.keyMessages));
     },
     [searchTerm]
   );
@@ -53,14 +71,20 @@ export default (props: { messages: Message[]; users: User[] }) => {
         <AccordionCollapse eventKey="0">
           <Card.Body>
             <Form onSubmit={handleSubmit}>
-              <Form.Control
-                type="text"
-                name="searchTerm"
-                onChange={(e) => setSearchTerm(e.target.value)}
-              ></Form.Control>
-              <Button type="submit" variant="primary">
-                Search
-              </Button>
+              <Form.Row className="Row">
+                <Col xs="auto">
+                  <Form.Control
+                    type="text"
+                    name="searchTerm"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  ></Form.Control>
+                </Col>
+                <Col xs="auto">
+                  <Button type="submit" variant="primary" className="mb-2">
+                    Search
+                  </Button>
+                </Col>
+              </Form.Row>
             </Form>
             <br></br>
             {searchResults ? (
@@ -69,6 +93,13 @@ export default (props: { messages: Message[]; users: User[] }) => {
                   "{searchResults.keyword}" occurs {searchResults.count} times
                   in this channel.
                 </p>
+                <LineChart width={500} height={500} data={keywordData}>
+                  <Line type="monotone" dataKey="y" stroke="#000"></Line>
+                  <CartesianGrid stroke="#ccc" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                </LineChart>
                 <MessageList
                   messages={searchResults.keyMessages}
                   users={props.users}
