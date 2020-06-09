@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import MessageList from "components/messageList";
 import MemberTable from "components/memberTable";
+import KeywordSearch from "components/keywordSearch";
 
 export default function () {
   const router = useRouter();
@@ -16,8 +17,9 @@ export default function () {
       <Layout>
         <>
           <h1>#{channelName}</h1>
-          {channel && <MemberTable channel={channel} users={users} />}
-          {messages && <MessageList messages={messages} users={users} />}
+          <MemberTable channel={channel} users={users} />
+          <KeywordSearch messages={messages} users={users} />
+          <MessageList messages={messages} users={users} />
         </>
       </Layout>
     );
