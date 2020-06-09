@@ -3,9 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Channel } from "models/channel";
 import { User } from "models/user";
-import { PieChart, Pie, Tooltip, Legend } from "recharts";
 import { messagesPerUser } from "utils/plotting";
-import { userMapFromList } from "utils/general";
 import { Message } from "models/message";
 import CenterDiv from "components/centerDiv";
 import MessageRatioChart from "components/charts/messageRatioChart";
@@ -16,7 +14,6 @@ export default (props: {
   messages: Message[];
 }) => {
   const channel = props.channel;
-  const userMap = userMapFromList(props.users);
   const messageRatioData = messagesPerUser(props.messages, props.users);
   return (
     <Accordion>
@@ -32,9 +29,12 @@ export default (props: {
               <MessageRatioChart messageRatioData={messageRatioData} />
             </CenterDiv>
             <ul>
-              {channel.members.map((member) => {
-                let user = userMap[member];
-                return <li key={user.id}>{user.profile.real_name}</li>;
+              {messageRatioData.map((value) => {
+                return (
+                  <li key={value.name}>
+                    {value.name}: {value.value} messages
+                  </li>
+                );
               })}
             </ul>
           </Card.Body>

@@ -1,20 +1,23 @@
-import { PieChart, Pie, Legend, Tooltip } from "recharts";
-import { PlotData } from "utils/plotting";
+import { PieChart, Pie, Legend, Tooltip, PieLabelRenderProps } from "recharts";
+import { PieData } from "utils/plotting";
 
-export default (props: { messageRatioData: PlotData[] }) => {
+const nameAndCountLabel = (entry: PieLabelRenderProps) => {
+  return [entry.name, entry.value].join(" | ");
+};
+
+export default (props: { messageRatioData: PieData[] }) => {
   return (
-    <PieChart width={500} height={700}>
+    <PieChart width={700} height={600}>
       <Pie
         data={props.messageRatioData}
-        dataKey="y"
+        dataKey="value"
         nameKey="name"
         cx="50%"
         cy="50%"
         outerRadius={150}
-        fill="#8884d8"
-        label
+        fill="#555"
+        label={nameAndCountLabel}
       />
-      <Legend />
       <Tooltip />
     </PieChart>
   );

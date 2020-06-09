@@ -2,6 +2,11 @@ import { Message } from "models/message";
 import { User } from "models/user";
 import { userMapFromList, notEmpty } from "./general";
 
+export interface PieData {
+  value: number;
+  name: string;
+}
+
 export interface PlotData {
   x: number | string;
   y: number;
@@ -57,12 +62,12 @@ export function messagesPerUser(messages: Message[], users: User[]) {
     .map(([id, count]) => {
       return userMap[id]?.profile
         ? {
-            x: id,
-            y: count,
+            value: count,
             name:
               userMap[id].profile.display_name || userMap[id].profile.real_name,
           }
         : null;
     })
-    .filter(notEmpty);
+    .filter(notEmpty)
+    .sort((a, b) => b.value - a.value);
 }
