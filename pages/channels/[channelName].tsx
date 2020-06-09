@@ -17,7 +17,7 @@ export default function () {
       <Layout>
         <>
           <h1>#{channelName}</h1>
-          <MemberTable channel={channel} users={users} />
+          <MemberTable channel={channel} users={users} messages={messages} />
           <KeywordSearch messages={messages} users={users} />
           <MessageList messages={messages} users={users} />
         </>
