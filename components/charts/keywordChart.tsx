@@ -1,4 +1,4 @@
-import { KeywordPlotData } from "utils/plotting";
+import { PlotData } from "utils/plotting";
 import {
   LineChart,
   Line,
@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "recharts";
 
-export default function (props: { keywordData: KeywordPlotData[] }) {
+export default function (props: { keywordData: PlotData[] }) {
   return (
     <LineChart width={500} height={500} data={props.keywordData}>
       <Line type="monotone" dataKey="y" stroke="#000"></Line>
