@@ -14,7 +14,7 @@ export default function (props: {
           <Form.Control
             type="text"
             name="searchTerm"
-            placeholder="Enter keyword here"
+            placeholder="Enter keyword/regex here"
             onChange={(e) => props.setSearchTerm(e.target.value)}
           ></Form.Control>
         </Col>
