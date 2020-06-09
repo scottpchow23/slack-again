@@ -5,12 +5,13 @@ import Card from "react-bootstrap/Card";
 import AccordionToggle from "react-bootstrap/AccordionToggle";
 import AccordionCollapse from "react-bootstrap/AccordionCollapse";
 import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState, useCallback, FormEvent } from "react";
 import MessageList from "./messageList";
 import { messagesToData, KeywordPlotData } from "utils/plotting";
 import KeywordChart from "./keywordChart";
-import Col from "react-bootstrap/Col";
+import KeywordForm from "./forms/keywordForm";
 
 const countKeyword = (keyword: string, messages: Message[]) => {
   let count = 0;
@@ -57,22 +58,10 @@ export default (props: { messages: Message[]; users: User[] }) => {
         </Card.Header>
         <AccordionCollapse eventKey="0">
           <Card.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Row className="Row">
-                <Col xs="auto">
-                  <Form.Control
-                    type="text"
-                    name="searchTerm"
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  ></Form.Control>
-                </Col>
-                <Col xs="auto">
-                  <Button type="submit" variant="primary" className="mb-2">
-                    Search
-                  </Button>
-                </Col>
-              </Form.Row>
-            </Form>
+            <KeywordForm
+              handleSubmit={handleSubmit}
+              setSearchTerm={setSearchTerm}
+            />
             <br></br>
             {searchResults ? (
               <>
