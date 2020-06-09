@@ -8,15 +8,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useCallback, FormEvent } from "react";
 import MessageList from "./messageList";
-import { messagesToData } from "utils/plotting";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+import { messagesToData, KeywordPlotData } from "utils/plotting";
+import KeywordChart from "./keywordChart";
 import Col from "react-bootstrap/Col";
 
 const countKeyword = (keyword: string, messages: Message[]) => {
@@ -37,12 +30,6 @@ interface SearchResult {
   keyword: string;
   count: number;
   keyMessages: Message[];
-}
-
-interface KeywordPlotData {
-  x: number;
-  y: number;
-  name: string;
 }
 
 export default (props: { messages: Message[]; users: User[] }) => {
@@ -93,13 +80,7 @@ export default (props: { messages: Message[]; users: User[] }) => {
                   "{searchResults.keyword}" occurs {searchResults.count} times
                   in this channel.
                 </p>
-                <LineChart width={500} height={500} data={keywordData}>
-                  <Line type="monotone" dataKey="y" stroke="#000"></Line>
-                  <CartesianGrid stroke="#ccc" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                </LineChart>
+                <KeywordChart keywordData={keywordData} />
                 <MessageList
                   messages={searchResults.keyMessages}
                   users={props.users}

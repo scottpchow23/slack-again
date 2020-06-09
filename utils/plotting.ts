@@ -1,5 +1,11 @@
 import { Message } from "models/message";
 
+export interface KeywordPlotData {
+  x: number;
+  y: number;
+  name: string;
+}
+
 export function messagesToData(messages: Message[]) {
   let dataDictionary: { [id: string]: number } = {};
   messages.forEach((message: Message) => {
