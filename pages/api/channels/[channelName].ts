@@ -4,7 +4,7 @@ import { Message } from "models/message";
 import { Channel } from "models/channel";
 import { User } from "models/user";
 
-async function getMessagesForChannel(channelName: string | string[]) {
+export async function getMessagesForChannel(channelName: string | string[]) {
   let messages: Message[] = [];
 
   let file_list = await fs.promises.readdir(
@@ -34,7 +34,7 @@ async function getChannelInfo(channelName: string | string[]) {
   return channel;
 }
 
-async function getUsers() {
+export async function getUsers() {
   let users = JSON.parse(
     await fs.promises.readFile("public/data/users.json", "utf-8")
   );
