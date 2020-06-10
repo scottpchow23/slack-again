@@ -9,7 +9,7 @@ import CenterDiv from "components/centerDiv";
 import MessageRatioChart from "components/charts/messageRatioChart";
 
 export default (props: {
-  channel: Channel;
+  channel: { name: string; members: string[] };
   users: User[];
   messages: Message[];
 }) => {
