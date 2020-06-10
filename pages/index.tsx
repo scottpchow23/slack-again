@@ -6,7 +6,6 @@ import KeywordSearch from "components/keywordSearch";
 
 export default function Home() {
   const { data, mutate } = useSWR("/api/channels");
-  debugger;
   if (data) {
     const channels = data?.channels;
     const messages = data?.messages;
