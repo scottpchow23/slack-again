@@ -1,8 +1,9 @@
 import { Message } from "models/message";
 import { User } from "models/user";
 import { userMapFromList, notEmpty } from "./general";
+import { Dictionary } from "typescript-collections";
 
-export interface PieData {
+export interface SimpleData {
   value: number;
   name: string;
 }
@@ -70,4 +71,50 @@ export function messagesPerUser(messages: Message[], users: User[]) {
     })
     .filter(notEmpty)
     .sort((a, b) => b.value - a.value);
+}
+
+export interface UserPair {
+  respondee: string;
+  responder: string;
+}
+
+const pairToString = (pair: UserPair) => {
+  return pair.respondee > pair.responder
+    ? pair.respondee + pair.responder
+    : pair.responder + pair.respondee;
+};
+
+export interface NamedData {
+  displayName: string;
+  name: string;
+  value: number;
+}
+
+export function userMessagePairCounts(users: User[], messages: Message[]) {
+  let prevMessage: Message | null = null;
+  let pairCounts = new Dictionary<UserPair, number>(pairToString);
+  const userMap = userMapFromList(users);
+
+  for (const message of messages) {
+    if (prevMessage === null) {
+      prevMessage = message;
+      continue;
+    }
+    const prevUser = userMap[prevMessage.user];
+    const curUser = userMap[message.user];
+    const pair = {
+      responder: prevUser?.profile.real_name,
+      respondee: curUser?.profile.real_name,
+    };
+    pairCounts.setValue(pair, (pairCounts.getValue(pair) || 0) + 1);
+  }
+  let data: NamedData[] = [];
+  pairCounts.forEach((key, value) => {
+    data.push({
+      name: key.respondee + " - " + key.responder,
+      value: value,
+      displayName: key.respondee[0] + " - " + key.responder[0],
+    });
+  });
+  return data.sort((a, b) => b.value - a.value);
 }
