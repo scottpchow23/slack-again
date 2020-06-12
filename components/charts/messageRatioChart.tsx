@@ -1,11 +1,11 @@
 import { PieChart, Pie, Legend, Tooltip, PieLabelRenderProps } from "recharts";
-import { PieData } from "utils/plotting";
+import { SimpleData } from "utils/plotting";
 
 const nameAndCountLabel = (entry: PieLabelRenderProps) => {
   return [entry.name, entry.value].join(" | ");
 };
 
-export default (props: { messageRatioData: PieData[] }) => {
+export default (props: { messageRatioData: SimpleData[] }) => {
   return (
     <PieChart width={700} height={600}>
       <Pie
