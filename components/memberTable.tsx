@@ -1,7 +1,6 @@
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { Channel } from "models/channel";
 import { User } from "models/user";
 import { messagesPerUser } from "utils/plotting";
 import { Message } from "models/message";

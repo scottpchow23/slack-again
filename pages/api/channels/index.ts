@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
-import { Channel } from "models/channel";
 import { getMessagesForChannel, getUsers } from "./[channelName]";
 import { Message } from "models/message";
 import { User } from "models/user";
